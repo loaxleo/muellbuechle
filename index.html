@@ -6,247 +6,228 @@
     <title>Register - Leonard Loacker</title>
     <style>
         :root {
-            --bg-color: #f0f2f5;
+            --bg-color: #f8f9fa;
             --card-bg: #ffffff;
-            --text-main: #1a1a1a;
-            --text-sub: #65676b;
-            --border: #dddfe2;
-            --accent: #007bff;
-            --btn-hover: #e4e6eb;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --toggle-bg: #ddd;
+            --text-main: #212529;
+            --text-sub: #6c757d;
+            --border: #dee2e6;
+            --toggle-bg: #e9ecef;
+            --accent-2025: #007bff;
+            --accent-2026: #6f42c1;
+            --icon-color: #495057;
         }
 
         [data-theme="dark"] {
-            --bg-color: #18191a;
-            --card-bg: #242526;
-            --text-main: #e4e6eb;
-            --text-sub: #b0b3b8;
-            --border: #3e4042;
-            --accent: #4599ff;
-            --btn-hover: #3a3b3c;
-            --shadow: 0 4px 15px rgba(0,0,0,0.3);
-            --toggle-bg: #4a4a4a;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #f1f3f5;
+            --text-sub: #adb5bd;
+            --border: #2d2d2d;
+            --toggle-bg: #2d2d2d;
+            --icon-color: #dee2e6;
         }
 
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px 20px 140px 20px;
+            padding: 20px 15px 140px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.3s ease;
+            overflow-x: hidden;
+            width: 100vw;
         }
 
-        /* Top Bar Controls */
         .top-bar {
-            position: fixed;
-            top: 20px;
-            width: 90%;
-            max-width: 800px;
+            width: 100%;
+            max-width: 500px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            z-index: 1001;
+            margin-bottom: 30px;
         }
 
-        /* Language Button */
-        .lang-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: 800;
-            font-size: 1rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Theme Toggle Switch */
-        .theme-switch {
-            width: 80px;
-            height: 40px;
+        .toggle-box {
+            width: 72px;
+            height: 38px;
             background: var(--toggle-bg);
             border-radius: 20px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 5px;
             cursor: pointer;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid var(--border);
         }
 
-        .theme-switch span { font-size: 1.2rem; z-index: 2; opacity: 0.3; transition: opacity 0.3s; }
-        .theme-switch span.active { opacity: 1; }
+        .toggle-box span { font-size: 1.1rem; z-index: 2; opacity: 0.3; transition: opacity 0.2s; }
+        .toggle-box span.active { opacity: 1; }
         
-        .switch-handle {
+        .handle {
             position: absolute;
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             background: var(--card-bg);
             border-radius: 50%;
-            left: 3px;
+            left: 2px;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 1;
         }
-        [data-theme="dark"] .switch-handle { transform: translateX(40px); }
 
-        /* Contact Icons */
+        [data-lang="en"] .lang-handle { transform: translateX(34px); }
+        [data-theme="dark"] .theme-handle { transform: translateX(34px); }
+
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            max-width: 400px;
-            margin: 80px 0 40px 0;
+            max-width: 350px;
+            margin-bottom: 40px;
         }
 
         .icon-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
             aspect-ratio: 1;
-            border-radius: 15px;
+            border-radius: 12px;
+            border: 1.5px solid var(--icon-color);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.8rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.1s;
+            font-size: 1.4rem;
+            color: var(--icon-color);
         }
-        .icon-btn:active { transform: scale(0.9); }
 
-        /* Content Sections */
-        .year-wrapper { width: 100%; max-width: 800px; margin-bottom: 15px; }
+        .year-section { width: 100%; max-width: 600px; margin-bottom: 10px; }
 
         .year-btn {
             width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 15px 25px;
-            border-radius: 15px;
-            font-size: 1.6rem;
+            background: none;
+            border: none;
+            padding: 15px 5px;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--text-main);
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            box-shadow: var(--shadow);
         }
 
-        .year-btn::after { content: '▾'; color: var(--text-sub); transition: transform 0.3s; }
-        .year-btn.collapsed::after { transform: rotate(-90deg); }
+        .year-btn::after { content: '→'; font-size: 1.2rem; transition: transform 0.3s; color: var(--text-sub); }
+        .year-btn.open::after { transform: rotate(90deg); }
 
-        .year-content { overflow: hidden; transition: max-height 0.3s ease-out; }
-        .year-content.hidden { display: none; }
-
-        .book-title {
-            padding: 20px 10px 10px 10px;
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-        }
-
-        .entry-card {
+        .book-group {
             background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
             border: 1px solid var(--border);
-            margin-bottom: 10px;
-            padding: 16px 20px;
-            border-radius: 12px;
+        }
+
+        .book-header {
+            padding: 12px 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.02);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entry {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
-            box-shadow: var(--shadow);
         }
-        .entry-card:hover { background: var(--btn-hover); }
 
-        .page-tag {
-            background: var(--bg-color);
-            padding: 5px 12px;
-            border-radius: 8px;
+        .entry:last-child { border-bottom: none; }
+        .entry:active { background-color: var(--toggle-bg); }
+        .entry span { font-size: 0.95rem; line-height: 1.4; }
+        
+        .page-badge {
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--text-sub);
-            font-size: 0.85rem;
+            background: var(--bg-color);
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
             white-space: nowrap;
         }
 
-        /* Search */
-        .search-container {
+        .search-bar {
             position: fixed;
             bottom: 30px;
-            width: 90%;
+            width: calc(100% - 30px);
             max-width: 500px;
             z-index: 1000;
         }
 
         #searchInput {
             width: 100%;
-            padding: 18px 30px;
-            border-radius: 40px;
+            padding: 16px 25px;
+            border-radius: 30px;
             border: 1px solid var(--border);
             background: var(--card-bg);
             color: var(--text-main);
-            font-size: 1.1rem;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             outline: none;
         }
 
         #toast {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
+            top: 20px;
+            background: #212529;
             color: white;
-            padding: 12px 24px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
             display: none;
             z-index: 2000;
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="light" data-lang="de">
+
+    <div id="toast">Kopiert!</div>
 
     <div class="top-bar">
-        <div class="theme-switch" id="themeToggle">
-            <div class="switch-handle"></div>
+        <div class="toggle-box" id="themeToggle">
+            <div class="handle theme-handle"></div>
             <span id="sunIcon" class="active">☀️</span>
             <span id="moonIcon">🌙</span>
         </div>
-        <button id="langToggle" class="lang-btn">DE</button>
+        <div class="toggle-box" id="langToggle">
+            <div class="handle lang-handle"></div>
+            <span id="deIcon" class="active">🇩🇪</span>
+            <span id="enIcon">🇬🇧</span>
+        </div>
     </div>
-
-    <div id="toast">Copied!</div>
 
     <div class="contact-grid">
-        <a href="mailto:loaleo@gmx.at" class="icon-btn">✉️</a>
-        <a href="https://loaleo.at" target="_blank" class="icon-btn">🌐</a>
-        <a href="tel:+4368184999262" class="icon-btn">📞</a>
-        <a href="https://maps.google.com/?q=Dornbirn" target="_blank" class="icon-btn">📍</a>
+        <a href="mailto:loaleo@gmx.at" class="icon-btn">✉</a>
+        <a href="https://loaleo.at" target="_blank" class="icon-btn">🌍</a>
+        <a href="tel:+4368184999262" class="icon-btn">✆</a>
+        <a href="http://googleusercontent.com/maps.google.com/" target="_blank" class="icon-btn">⚲</a>
     </div>
 
-    <div id="contentArea" style="width: 100%; max-width: 800px;"></div>
+    <div id="contentArea" style="width: 100%;"></div>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Suche..." autocomplete="off">
     </div>
 
     <script>
         const data = [
+            // 2025
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Knife Block", en: "Knife Block", page: "10" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Aufhängeplan YAG", en: "Hanging plan YAG", page: "11-12" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Flug: Dehli -> Abu Dhabi #Ticket", en: "Flight: Dehli -> Abu Dhabi #Ticket", page: "38" },
@@ -279,11 +260,12 @@
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "second conference #fsj #Fischbach #Conference", page: "64" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" by Aris (2c) #fsj #Fischbach #Drawing #Note", page: "80" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dez", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: "86" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dez", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Note", page: "90" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dez", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dez", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Note", page: "105" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: "86" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Note", page: "90" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Note", page: "105" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: "112" },
+            // 2026
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
@@ -297,113 +279,105 @@
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", en: "Sketchbook 200 #Drawing #Sketchbook", page: "113" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Tanger", en: "Tangier", page: "1" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Faschingsdienstag mit #Edith #Zirkus #fsj #Fischbach", en: "Shrove Tuesday #Edith #Circus #fsj #Fischbach", page: "2-3" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Fridolin 18 #Fridolin#Film", en: "Fridolin 18 #Fridolin#Film", page: "57-61" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Sockenpuppe #fsj#Fischbach#Anleitung", en: "Sock puppet #fsj#Fischbach#Instructions", page: "67" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin#Film", en: "Merge video #Fridolin#Film", page: "68" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Lesen mit 1c #fsj#Fischbach", en: "Reading with 1c #fsj#Fischbach", page: "70" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj#Fischbach#Zettel", en: "WirHoch4 #fsj#Fischbach#Note", page: "79" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj#Fischbach#Zettel", en: "Signature Levian #fsj#Fischbach#Note", page: "84" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Fridolin 18 #Fridolin #Film", en: "Fridolin 18 #Fridolin #Film", page: "57-61" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Sockenpuppe #fsj #Fischbach #Anleitung", en: "Sock puppet #fsj #Fischbach #Instructions", page: "67" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin #Film", en: "Merge video #Fridolin #Film", page: "68" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Lesen mit 1c #fsj #Fischbach", en: "Reading with 1c #fsj #Fischbach", page: "70" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj #Fischbach #Zettel", en: "WirHoch4 #fsj #Fischbach #Note", page: "79" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj #Fischbach #Zettel", en: "Signature Levian #fsj #Fischbach #Note", page: "84" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Flug: Tanger -> Memmingen #Ticket", en: "Flight: Tangier -> Memmingen #Ticket", page: "88" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"I Magnum\" #Zeichnung#Sketchbook", en: "\"I Magnum\" #Drawing #Sketchbook", page: "91" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"I Magnum\" #Zeichnung #Sketchbook", en: "\"I Magnum\" #Drawing #Sketchbook", page: "91" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jonglieren? #fsj #Fischbach", en: "Juggling? #fsj #Fischbach", page: "102" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Lesende Lara (3b)\" #fsj #Fischbach #Zeichnung #Sketchbook", en: "Lara reading #fsj #Fischbach #Drawing #Sketchbook", page: "105" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jojos Flaschenbox #fsj #Zeichnung #Sketchbook #Blueprint", en: "Jojo's box #fsj #Drawing #Sketchbook #Blueprint", page: "111-112" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Hospiz Vlbg #fsj #SBOV #Mitschrift", en: "Hospice Vlbg #fsj #SBOV #Notes", page: "116-119" }
         ];
 
-        let isEn = false;
-        let isDark = false;
+        let currentLang = 'de';
+        let currentTheme = 'light';
 
-        const ui = {
-            de: { search: "Suche...", copy: "Kopiert!", p: "S." },
-            en: { search: "Search...", copy: "Copied!", p: "p." }
-        };
-
-        const themeToggle = document.getElementById('themeToggle');
-        const langToggle = document.getElementById('langToggle');
-        const searchInput = document.getElementById('searchInput');
-
-        // Toggle Theme
-        themeToggle.onclick = () => {
-            isDark = !isDark;
-            document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            document.getElementById('sunIcon').className = isDark ? '' : 'active';
-            document.getElementById('moonIcon').className = isDark ? 'active' : '';
-        };
-
-        // Toggle Language
-        langToggle.onclick = () => {
-            isEn = !isEn;
-            langToggle.innerText = isEn ? "EN" : "DE";
-            updateUI();
-        };
-
-        function updateUI() {
-            searchInput.placeholder = isEn ? ui.en.search : ui.de.search;
-            render(searchInput.value);
+        function updateToggles() {
+            document.getElementById('deIcon').classList.toggle('active', currentLang === 'de');
+            document.getElementById('enIcon').classList.toggle('active', currentLang === 'en');
+            document.getElementById('sunIcon').classList.toggle('active', currentTheme === 'light');
+            document.getElementById('moonIcon').classList.toggle('active', currentTheme === 'dark');
         }
+
+        document.getElementById('themeToggle').onclick = () => {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            updateToggles();
+        };
+
+        document.getElementById('langToggle').onclick = () => {
+            currentLang = currentLang === 'de' ? 'en' : 'de';
+            document.body.setAttribute('data-lang', currentLang);
+            document.getElementById('searchInput').placeholder = currentLang === 'de' ? "Suche..." : "Search...";
+            updateToggles();
+            render(document.getElementById('searchInput').value);
+        };
 
         function copy(text) {
             navigator.clipboard.writeText(text);
             const t = document.getElementById('toast');
-            t.innerText = isEn ? ui.en.copy : ui.de.copy;
+            t.innerText = currentLang === 'de' ? "Kopiert!" : "Copied!";
             t.style.display = 'block';
-            setTimeout(() => t.style.display = 'none', 1000);
+            setTimeout(() => t.style.display = 'none', 1200);
         }
 
         function render(filter = "") {
             const area = document.getElementById('contentArea');
             area.innerHTML = "";
             const query = filter.toLowerCase();
-            const filtered = data.filter(i => (isEn ? i.en : i.de).toLowerCase().includes(query));
-            
+            const filtered = data.filter(i => (currentLang === 'de' ? i.de : i.en).toLowerCase().includes(query));
             const years = [...new Set(filtered.map(i => i.year))].sort((a,b) => b-a);
 
             years.forEach(year => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'year-wrapper';
+                const yearSection = document.createElement('div');
+                yearSection.className = 'year-section';
 
-                const btn = document.createElement('div');
+                const btn = document.createElement('button');
                 btn.className = 'year-btn';
                 btn.innerHTML = `<span>${year}</span>`;
                 
-                const content = document.createElement('div');
-                content.className = 'year-content';
-                
-                // Toggle Logic
+                const container = document.createElement('div');
+                container.style.display = filter ? "block" : "none";
+                if(filter) btn.classList.add('open');
+
                 btn.onclick = () => {
-                    btn.classList.toggle('collapsed');
-                    content.classList.toggle('hidden');
+                    const isOpen = container.style.display === "block";
+                    container.style.display = isOpen ? "none" : "block";
+                    btn.classList.toggle('open');
                 };
 
-                const yearData = filtered.filter(i => i.year === year);
-                const books = [...new Set(yearData.map(i => isEn ? i.bEn : i.bDe))];
+                const yearColor = year === 2025 ? 'var(--accent-2025)' : 'var(--accent-2026)';
+                const books = [...new Set(filtered.filter(i => i.year === year).map(i => currentLang === 'de' ? i.bDe : i.bEn))];
 
-                books.forEach(book => {
-                    const bTitle = document.createElement('div');
-                    bTitle.className = 'book-title';
-                    bTitle.innerText = book;
-                    content.appendChild(bTitle);
+                books.forEach(bookName => {
+                    const group = document.createElement('div');
+                    group.className = 'book-group';
+                    group.innerHTML = `<div class="book-header" style="color:${yearColor}">${bookName}</div>`;
 
-                    yearData.filter(i => (isEn ? i.bEn : i.bDe) === book).forEach(entry => {
-                        const card = document.createElement('div');
-                        card.className = 'entry-card';
-                        const label = isEn ? entry.en : entry.de;
-                        const pLabel = isEn ? ui.en.p : ui.de.p;
-                        card.innerHTML = `<span>${label}</span><div class="page-tag">${pLabel} ${entry.page}</div>`;
-                        card.onclick = () => copy(`${label}, ${pLabel} ${entry.page}`);
-                        content.appendChild(card);
+                    filtered.filter(i => i.year === year && (currentLang === 'de' ? i.bDe : i.bEn) === bookName).forEach(entry => {
+                        const row = document.createElement('div');
+                        row.className = 'entry';
+                        const label = currentLang === 'de' ? entry.de : entry.en;
+                        const pLabel = currentLang === 'de' ? 'S.' : 'p.';
+                        row.innerHTML = `<span>${label}</span><div class="page-badge">${pLabel} ${entry.page}</div>`;
+                        row.onclick = () => copy(`${label}, ${pLabel} ${entry.page}`);
+                        group.appendChild(row);
                     });
+                    container.appendChild(group);
                 });
 
-                wrapper.appendChild(btn);
-                wrapper.appendChild(content);
-                area.appendChild(wrapper);
+                yearSection.appendChild(btn);
+                yearSection.appendChild(container);
+                area.appendChild(yearSection);
             });
         }
 
-        searchInput.oninput = (e) => render(e.target.value);
-        updateUI();
+        document.getElementById('searchInput').oninput = (e) => render(e.target.value);
+        render();
     </script>
 </body>
 </html>
