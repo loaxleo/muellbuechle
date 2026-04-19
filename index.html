@@ -36,13 +36,13 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px 20px 100px 20px; /* Platz für Search unten */
+            padding: 20px 20px 140px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Header & Kontakt */
+        /* Header */
         .contact-header {
             width: 100%;
             max-width: 800px;
@@ -61,38 +61,127 @@
         }
 
         .contact-info a { color: var(--text-sub); text-decoration: none; }
-        .contact-info a:hover { color: var(--accent); }
 
-        /* Suchleiste UNTEN */
+        /* Zentrierte Jahreszahlen */
+        .year-section {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Hält alles in der Mitte */
+        }
+        
+        .year-header {
+            width: 100%;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: center; /* Text immer in der Mitte */
+            align-items: center;
+            padding: 20px 0;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 2rem;
+            font-weight: 800;
+            position: relative;
+        }
+
+        .year-header span {
+            position: relative;
+        }
+
+        .year-header span::after {
+            content: '▼';
+            font-size: 0.9rem;
+            margin-left: 15px;
+            display: inline-block;
+            transition: transform 0.3s;
+            color: var(--text-sub);
+        }
+
+        .year-header.collapsed span::after { transform: rotate(-90deg); }
+
+        .year-content { width: 100%; }
+        .year-content.hidden { display: none; }
+
+        /* Buch-Karten */
+        .book-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-left: 6px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .book-header { 
+            padding: 12px 20px; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            text-transform: uppercase;
+            background: rgba(128,128,128,0.05);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 0.95rem; cursor: pointer; }
+        tr:hover td { background: rgba(0,123,255,0.05); }
+        .page-col { text-align: right; font-weight: 700; color: var(--text-sub); width: 80px; }
+
+        /* Bottom Nav & Tags */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: var(--bg-color);
-            padding: 15px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            padding: 10px 0 25px 0;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             z-index: 1000;
+        }
+
+        #tagCloud {
+            display: none; /* Standardmäßig versteckt */
+            width: 100%;
+            max-width: 600px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0 20px 15px 20px;
+            scrollbar-width: none;
+        }
+        #tagCloud::-webkit-scrollbar { display: none; }
+
+        .tag-btn {
+            display: inline-block;
+            background: var(--tag-bg);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-right: 8px;
+            border: 1px solid var(--border);
+            color: var(--text-main);
         }
 
         .search-wrapper {
             position: relative;
-            width: 100%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 500px;
         }
 
         #searchInput {
             width: 100%;
-            padding: 14px 45px 14px 20px;
-            border-radius: 30px;
+            padding: 15px 45px 15px 25px;
+            border-radius: 35px;
             border: 2px solid var(--border);
             background: var(--search-bg);
             color: var(--text-main);
             font-size: 1rem;
             outline: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
         #clearSearch {
@@ -102,99 +191,23 @@
             transform: translateY(-50%);
             background: none;
             border: none;
+            font-size: 1.5rem;
             color: var(--text-sub);
-            font-size: 1.2rem;
             cursor: pointer;
             display: none;
         }
 
-        /* Tags */
-        #tagCloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-
-        .tag-btn {
-            background: var(--tag-bg);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            color: var(--text-main);
-        }
-
-        /* Akkordeon & Content */
-        .year-section { width: 100%; max-width: 800px; margin-top: 20px; }
-        
-        .year-header {
-            width: 100%;
-            background: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            cursor: pointer;
-            color: var(--text-main);
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-
-        .year-header::after {
-            content: '▼';
-            font-size: 0.8rem;
-            margin-left: 15px;
-            transition: transform 0.3s;
-            color: var(--text-sub);
-        }
-
-        .year-header.collapsed::after { transform: rotate(-90deg); }
-
-        .year-content { transition: max-height 0.3s ease-out; overflow: hidden; }
-        .year-content.hidden { display: none; }
-
-        .book-section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-left: 5px solid #ccc;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .book-header { 
-            padding: 12px 20px; 
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            text-transform: uppercase; 
-            background: rgba(128,128,128,0.05);
-        }
-
-        table { width: 100%; border-collapse: collapse; }
-        td { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; cursor: pointer; }
-        tr:hover td { background: rgba(0,123,255,0.05); }
-        .page-col { text-align: right; font-weight: 700; color: var(--text-sub); width: 80px; }
-
-        /* Toast Message */
         #toast {
             position: fixed;
             top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--accent);
             color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 30px;
             display: none;
-            z-index: 2000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 600px) {
-            .contact-info { grid-template-columns: 1fr; }
-            body { padding-bottom: 120px; }
+            z-index: 2001;
         }
     </style>
 </head>
@@ -203,30 +216,30 @@
     <div id="toast">Kopiert!</div>
 
     <div class="contact-header">
-        <h1 id="mainHeader">Bibliothek Register</h1>
+        <h1>Bibliothek Register</h1>
         <strong>Leonard Loacker</strong>
         <div class="contact-info">
             <a href="mailto:loaleo@gmx.at">loaleo@gmx.at</a>
             <a href="https://loaleo.at" target="_blank">loaleo.at</a>
             <a href="tel:+4368184999262">+43 681 84999262</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Nägelesgarten+3,+6850+Dornbirn,+Austria" target="_blank">Nägelesgarten 3, 6850 Dornbirn</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Nägelesgarten+3,+6850+Dornbirn" target="_blank">Nägelesgarten 3, 6850 Dornbirn</a>
         </div>
     </div>
 
-    <div id="tagCloud"></div>
     <div id="contentArea"></div>
-    <div id="noResults" style="display:none; color:var(--text-sub); margin-top:50px;">Keine Treffer.</div>
+    <div id="noResults" style="display:none; color:var(--text-sub); margin-top:50px; text-align:center;">Nichts gefunden.</div>
 
     <div class="bottom-nav">
+        <div id="tagCloud"></div>
         <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="Suchen... ( / )" autocomplete="off">
-            <button id="clearSearch">&times;</button>
+            <input type="text" id="searchInput" placeholder="Suche... (Taste / )" autocomplete="off">
+            <button id="clearSearch">×</button>
         </div>
     </div>
 
     <script>
-        // Daten wie gehabt
         const data = [
+            // Deine Daten hier einfügen (identisch mit vorherigem Stand)
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Knife Block", en: "Knife Block", page: "10" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Aufhängeplan YAG", en: "Hanging plan YAG", page: "11-12" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Flug: Dehli -> Abu Dhabi #Ticket", en: "Flight: Dehli -> Abu Dhabi #Ticket", page: "38" },
@@ -263,10 +276,10 @@
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Zettel", page: "90" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Zettel", page: "105" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dez", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Zirkus #Zettel", page: "112" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Zirkus #Zettel", page: "112" },
             { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
             { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
-            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
+            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", en: "\"Aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär #fsj #SBOV #Notes", page: "53-54" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Zirkus #fsj #Fischbach", page: "67-68" },
@@ -295,8 +308,8 @@
         const searchInput = document.getElementById('searchInput');
         const clearBtn = document.getElementById('clearSearch');
         const contentArea = document.getElementById('contentArea');
+        const tagCloud = document.getElementById('tagCloud');
 
-        // Hilfsfunktion: Text kopieren
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
             const toast = document.getElementById('toast');
@@ -304,20 +317,21 @@
             setTimeout(() => toast.style.display = 'none', 1500);
         }
 
-        function formatText(text) {
-            return text.replace(/#/g, ' #').replace(/\s+/g, ' ').trim();
-        }
+        searchInput.onfocus = () => tagCloud.style.display = "block";
+        
+        // Versteckt Tags nur, wenn das Feld leer ist und den Fokus verliert
+        searchInput.onblur = () => {
+            if(!searchInput.value) setTimeout(() => tagCloud.style.display = "none", 200);
+        };
 
-        // Suche leeren
         clearBtn.onclick = () => {
             searchInput.value = "";
             clearBtn.style.display = "none";
+            tagCloud.style.display = "none";
             render();
-            searchInput.focus();
         };
 
-        // Shortcuts
-        window.addEventListener('keydown', (e) => {
+        window.onkeydown = (e) => {
             if (e.key === '/') {
                 if (document.activeElement !== searchInput) {
                     e.preventDefault();
@@ -328,12 +342,13 @@
                 searchInput.value = "";
                 render();
             }
-        });
+        };
 
         function render(filter = "") {
             contentArea.innerHTML = "";
             const query = filter.toLowerCase();
             clearBtn.style.display = query ? "block" : "none";
+            if(query) tagCloud.style.display = "block";
 
             const filtered = data.filter(item => 
                 item.de.toLowerCase().includes(query) || item.en.toLowerCase().includes(query) ||
@@ -350,7 +365,7 @@
 
                 const yearBtn = document.createElement('button');
                 yearBtn.className = 'year-header';
-                yearBtn.innerText = year;
+                yearBtn.innerHTML = `<span>${year}</span>`;
                 yearBtn.onclick = () => {
                     const content = yearSection.querySelector('.year-content');
                     content.classList.toggle('hidden');
@@ -360,6 +375,7 @@
                 const yearContent = document.createElement('div');
                 yearContent.className = 'year-content';
                 
+                const yearColor = year === 2025 ? 'var(--color-2025)' : 'var(--color-2026)';
                 const yearData = filtered.filter(item => item.year === year);
                 const bookGroups = yearData.reduce((acc, item) => {
                     const name = isEn ? item.bEn : item.bDe;
@@ -368,20 +384,17 @@
                     return acc;
                 }, {});
 
-                const yearColor = year === 2025 ? 'var(--color-2025)' : 'var(--color-2026)';
-
                 for (const bookName in bookGroups) {
                     const section = document.createElement('div');
                     section.className = 'book-section';
                     section.style.borderLeftColor = yearColor;
 
-                    const rows = bookGroups[bookName].map(item => {
-                        const displayText = formatText(isEn ? item.en : item.de);
-                        return `<tr onclick="copyToClipboard('${displayText}, S.${item.page}')">
-                            <td>${displayText}</td>
+                    const rows = bookGroups[bookName].map(item => `
+                        <tr onclick="copyToClipboard('${isEn ? item.en : item.de}, S. ${item.page}')">
+                            <td>${isEn ? item.en : item.de}</td>
                             <td class="page-col">${item.page}</td>
-                        </tr>`;
-                    }).join('');
+                        </tr>
+                    `).join('');
 
                     section.innerHTML = `
                         <div class="book-header" style="color:${yearColor}">${bookName}</div>
@@ -396,11 +409,10 @@
             });
         }
 
-        // Tags initialisieren
         function initTags() {
             const allTags = [...new Set(data.map(i => i.de + i.en).join(" ").match(/#[A-Za-z0-9']+/g))].sort();
-            document.getElementById('tagCloud').innerHTML = allTags.map(t => 
-                `<button class="tag-btn" onclick="searchInput.value='${t}'; render('${t}');">${t}</button>`
+            tagCloud.innerHTML = allTags.map(t => 
+                `<div class="tag-btn" onclick="searchInput.value='${t}'; render('${t}');">${t}</div>`
             ).join("");
         }
 
