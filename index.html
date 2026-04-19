@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliothek Register</title>
     <style>
-        /* HELLER MODUS (Standard) */
+        /* UI & Responsive Design */
         :root {
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
@@ -17,7 +17,6 @@
             --tag-bg: #eee;
         }
 
-        /* DUNKLER MODUS (Systemeinstellung) */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-color: #121212;
@@ -66,9 +65,7 @@
             transition: all 0.3s ease;
         }
 
-        #searchInput:focus {
-            border-color: var(--input-focus);
-        }
+        #searchInput:focus { border-color: var(--input-focus); }
 
         #tagCloud {
             max-width: 800px;
@@ -91,11 +88,7 @@
             transition: all 0.2s;
         }
 
-        .tag-btn:hover {
-            background: var(--input-focus);
-            color: white;
-            border-color: var(--input-focus);
-        }
+        .tag-btn:hover { background: var(--input-focus); color: white; border-color: var(--input-focus); }
 
         .year-section { width: 100%; max-width: 900px; margin-top: 40px; }
         .year-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; border-left: 6px solid var(--text-sub); padding-left: 15px; }
@@ -121,7 +114,7 @@
 </head>
 <body>
 
-    <h1 id="mainHeader" style="margin-top: 20px;">Bibliothek Register</h1>
+    <h1 id="mainHeader">Bibliothek Register</h1>
 
     <div class="search-container">
         <input type="text" id="searchInput" autocomplete="off">
@@ -161,16 +154,16 @@
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", en: "Provisional driving license #Car #Easydrivers #Note", page: 47 },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Kreisverkehr Messepark #Auto #Easydrivers #Zeichnung #Blueprint", en: "Roundabout Messepark #Car #Easydrivers #Drawing #Blueprint", page: "48-49" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "4x4 Rubik's Master #Rubik's #SolutionGuide", en: "4x4 Rubik's Master #Rubik's #SolutionGuide", page: "52-55" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Korg Volca Sample 2 #Korg #Keymap", en: "Korg Volca Sample 2 #Korg #Keymap", page: 57 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", en: "\"Diabolo Chaos\" #Circus #Drawing #Sketchbook", page: 61 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "Second conference #fsj #Fischbach #Conference", page: 64 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" (2c) #fsj #Fischbach #Drawing #Note", page: 80 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: 86 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake (3b) #fsj #Fischbach #Note", page: 90 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: 99 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing (1c) #fsj #Fischbach #Note", page: 105 },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: 112 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Korg Volca Sample 2 #Korg #Keymap", en: "Korg Volca Sample 2 #Korg #Keymap", page: 57 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", en: "\"Diabolo Chaos\" #Circus #Drawing #Sketchbook", page: 61 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "Second conference #fsj #Fischbach #Conference", page: 64 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" (2c) #fsj #Fischbach #Drawing #Note", page: 80 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: 86 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake (3b) #fsj #Fischbach #Note", page: 90 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: 99 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing (1c) #fsj #Fischbach #Note", page: 105 },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: 112 },
 
             // Buch 5 (Splitted)
             { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: 5 },
@@ -209,21 +202,20 @@
         const searchInput = document.getElementById('searchInput');
         const tagCloud = document.getElementById('tagCloud');
 
-        // Dynamische Farbwahl basierend auf dem Jahr und Modus
         function getYearColor(year, text) {
             let hash = 0;
             for (let i = 0; i < text.length; i++) hash = text.charCodeAt(i) + ((hash << 5) - hash);
             const hueShift = Math.abs(hash) % 30; 
             const lightness = isDarkMode ? '65%' : '45%';
             const saturation = isDarkMode ? '50%' : '70%';
-
             if (year === 2025) return `hsl(${210 + hueShift}, ${saturation}, ${lightness})`; 
             if (year === 2026) return `hsl(${275 + hueShift}, ${isDarkMode ? '45%' : '60%'}, ${lightness})`; 
             return "#ccc";
         }
 
+        // Sammelt Hashtags aus DE und EN Feldern
         function getAllTags() {
-            const allText = data.map(i => i.de).join(" ");
+            const allText = data.map(i => i.de + " " + i.en).join(" ");
             const matches = allText.match(/#[A-Za-z0-9']+/g);
             return [...new Set(matches)].sort();
         }
@@ -244,7 +236,14 @@
         function render(filter = "") {
             contentArea.innerHTML = "";
             const query = filter.toLowerCase();
-            const filtered = data.filter(item => (isEn ? item.en : item.de).toLowerCase().includes(query));
+            
+            // WICHTIG: Durchsucht DE und EN gleichzeitig, egal wie das Gerät eingestellt ist
+            const filtered = data.filter(item => 
+                item.de.toLowerCase().includes(query) || 
+                item.en.toLowerCase().includes(query) ||
+                item.bDe.toLowerCase().includes(query) ||
+                item.bEn.toLowerCase().includes(query)
+            );
 
             const noRes = document.getElementById('noResults');
             noRes.innerText = isEn ? "No matches found." : "Keine Treffer gefunden.";
@@ -273,10 +272,12 @@
                     
                     const rows = bookGroups[bookName].map(item => `
                         <tr>
-                            <td>${isEn ? item.en : item.de}</td>
+                            <td>${isEn ? item.de : item.de}</td> 
                             <td class="page-col">${item.page}</td>
                         </tr>
                     `).join('');
+                    // Oben: "isEn ? item.en : item.de" sorgt dafür, dass der Text in der Sprache des Systems erscheint, 
+                    // aber dank des Filters oben wird er bei jeder Suche (egal welche Sprache) gefunden.
 
                     section.innerHTML = `<div class="book-header" style="color:${color}">${bookName}</div><table><tbody>${rows}</tbody></table>`;
                     yearSection.appendChild(section);
