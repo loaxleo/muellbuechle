@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliothek Register</title>
+    <title>Bibliothek Register - Leonard Loacker</title>
     <style>
         :root {
             --bg-color: #f8f9fa;
@@ -39,6 +39,33 @@
             flex-direction: column;
             align-items: center;
             transition: background-color 0.3s ease;
+        }
+
+        .contact-header {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 20px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-top: 10px;
+        }
+
+        .contact-info a {
+            color: var(--text-sub);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--input-focus);
         }
 
         .search-container {
@@ -104,16 +131,29 @@
 
         .book-header { padding: 18px 20px; font-weight: 800; font-size: 1.1rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
         table { width: 100%; border-collapse: collapse; }
-        td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+        td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.95rem; line-height: 1.4; }
         tr:last-child td { border-bottom: none; }
         tr:hover { background: rgba(128,128,128,0.05); }
         .page-col { width: 100px; font-weight: 700; text-align: right; color: var(--text-sub); }
         .no-results { display: none; margin-top: 60px; color: var(--text-sub); font-size: 1.2rem; }
+
+        @media (max-width: 600px) {
+            .contact-info { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <h1 id="mainHeader">Bibliothek Register</h1>
+    <div class="contact-header">
+        <h1 id="mainHeader" style="margin-bottom: 5px;">Bibliothek Register</h1>
+        <strong>Loacker Leonard</strong>
+        <div class="contact-info">
+            <div><a href="mailto:loaleo@gmx.at">loaleo@gmx.at</a></div>
+            <div><a href="https://loaleo.at" target="_blank">loaleo.at</a></div>
+            <div><a href="tel:+4368184999262">+43 681 84999262</a></div>
+            <div>Nägelesgarten 3, 6850 Dornbirn</div>
+        </div>
+    </div>
 
     <div class="search-container">
         <input type="text" id="searchInput" autocomplete="off">
@@ -153,50 +193,50 @@
             // Buch 4: 2025
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Aufführung #MusikgymnasiumFeldkirch", en: "\"Fast Run\" #Mademoiselle #Magdalena #Performance #MusikgymnasiumFeldkirch", page: "11" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Sketchbook Day 100 #Zeichnung #Sketchbook", en: "Sketchbook Day 100 #Drawing #Sketchbook", page: "11" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "erster Solo-Trip nach #Wien #Zeichnung #Sketchbook", en: "First solo trip to #Vienna #Drawing #Sketchbook", page: "17-27" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "erster Solo-Trip nach #Wien #Zeichnung #Sketchbook", en: "First solo trip to #Vienna #Drawing #Sketchbook", page: "17-27" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "A&O zum Auto #Easydrivers #Auto", en: "A&O for the car #Easydrivers #Auto", page: "36-38" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 3\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation and self-reflection 3\" #fsj #SBOV #Course #Notes", page: "41-43" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", en: "Provisional driver's license #Auto #Easydrivers #Zettel", page: "47" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 3\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 3\" #fsj #SBOV #Course #Notes", page: "41-43" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", en: "Provisional license #Auto #Easydrivers #Zettel", page: "47" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Kreisverkehr Messepark #Auto #Easydrivers #Zeichnung #Blueprint", en: "Roundabout Messepark #Auto #Easydrivers #Drawing #Blueprint", page: "48-49" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "4x4 Rubik's Master #Rubik's #SolutionGuide", en: "4x4 Rubik's Master #Rubik's #SolutionGuide", page: "52-55" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Korg Volca Sample 2 #Korg #Keymap", en: "Korg Volca Sample 2 #Korg #Keymap", page: "57" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", en: "\"Diabolo Chaos\" #Zirkus #Drawing #Sketchbook", page: "61" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "Second conference #fsj #Fischbach #Konferenz", page: "64" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation and self-reflection 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" by Aris (2c) #fsj #Fischbach #Drawing #Zettel", page: "80" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: "86" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Zettel", page: "90" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Zettel", page: "105" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Zirkus #Zettel", page: "112" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Zettel", page: "105" },
+            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Okt - Dez", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Zirkus #Zettel", page: "112" },
 
             // Buch 5: 2025 / 2026
             { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
-            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik #SolutionGuide", en: "Rubik's Pyraminx #Rubik #SolutionGuide", page: "8-9" },
+            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
             { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten, -muster 1\" #fsj #SBOV #Mitschrift", en: "\"Dealing with aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär: \"Work with disabled people 1\" #fsj #SBOV #Notes", page: "53-54" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clown performance with #Edith #Zirkus #fsj #Fischbach", page: "67-68" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten, -muster 2\" #fsj #SBOV #Mitschrift", en: "\"Dealing with aggression 2\" #fsj #SBOV #Notes", page: "69-70" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", en: "\"Aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär #fsj #SBOV #Notes", page: "53-54" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Zirkus #fsj #Fischbach", page: "67-68" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 2\" #fsj #SBOV #Mitschrift", en: "\"Aggression 2\" #fsj #SBOV #Notes", page: "69-70" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "FH Dornbirn #fsj #SBOV #Mitschrift", en: "FH Dornbirn #fsj #SBOV #Notes", page: "73" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sockenpuppe #fsj #Fischbach #Zeichnung", en: "Sock puppet #fsj #Fischbach #Drawing", page: "88-89" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Semesterkonferenz VS Fischbach #fsj #Fischbach #Konferenz", en: "Semester conference VS Fischbach #fsj #Fischbach #Konferenz", page: "96-97" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", en: "Sketchbook Day 200 #Drawing #Sketchbook", page: "113" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Semesterkonferenz VS Fischbach #fsj #Fischbach #Konferenz", en: "Conference #fsj #Fischbach #Konferenz", page: "96-97" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", en: "Sketchbook 200 #Drawing #Sketchbook", page: "113" },
 
             // Buch 6: 2026
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Tanger", en: "Tangier", page: "1" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Faschingsdienstag mit #Edith#Zirkus#fsj#Fischbach", en: "Shrove Tuesday with #Edith#Zirkus#fsj#Fischbach", page: "2-3" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Faschingsdienstag mit #Edith#Zirkus#fsj#Fischbach", en: "Shrove Tuesday #Edith#Zirkus#fsj#Fischbach", page: "2-3" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Fridolin 18 #Fridolin#Film", en: "Fridolin 18 #Fridolin#Film", page: "57-61" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Sockenpuppe #fsj#Fischbach#Anleitung", en: "Sock puppet #fsj#Fischbach#Instructions", page: "67" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin#Film", en: "Merge video without re-exporting? #Fridolin#Film", page: "68" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin#Film", en: "Merge video #Fridolin#Film", page: "68" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Lesen mit 1c #fsj#Fischbach", en: "Reading with 1c #fsj#Fischbach", page: "70" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj#Fischbach#Zettel", en: "Message from WirHoch4 #fsj#Fischbach#Zettel", page: "79" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj#Fischbach#Zettel", en: "\"Signature\" Levian (4b) #fsj#Fischbach#Zettel", page: "84" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj#Fischbach#Zettel", en: "WirHoch4 #fsj#Fischbach#Zettel", page: "79" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj#Fischbach#Zettel", en: "Signature Levian #fsj#Fischbach#Zettel", page: "84" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Flug: Tanger -> Memmingen #Ticket", en: "Flight: Tangier -> Memmingen #Ticket", page: "88" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"I Magnum\" #Zeichnung#Sketchbook", en: "\"I Magnum\" #Drawing#Sketchbook", page: "91" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jonglieren? #fsj#Fischbach", en: "Juggling? #fsj#Fischbach", page: "102" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Lesende Lara (3b)\" #fsj#Fischbach#Zeichnung #Sketchbook", en: "\"Lara reading (3b)\" #fsj#Fischbach#Drawing #Sketchbook", page: "105" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jojos Flaschenbox #fsj#Zeichnung#Sketchbook#Blueprint", en: "Jojo's bottle box #fsj#Drawing#Sketchbook#Blueprint", page: "111-112" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Lesende Lara (3b)\" #fsj#Fischbach#Zeichnung #Sketchbook", en: "Lara reading #fsj#Fischbach#Drawing #Sketchbook", page: "105" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jojos Flaschenbox #fsj#Zeichnung#Sketchbook#Blueprint", en: "Jojo's box #fsj#Drawing#Sketchbook#Blueprint", page: "111-112" },
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Hospiz Vlbg #fsj#SBOV#Mitschrift", en: "Hospice Vlbg #fsj#SBOV#Notes", page: "116-119" }
         ];
 
@@ -206,6 +246,10 @@
         const contentArea = document.getElementById('contentArea');
         const searchInput = document.getElementById('searchInput');
         const tagCloud = document.getElementById('tagCloud');
+
+        function formatText(text) {
+            return text.replace(/#/g, ' #').replace(/\s+/g, ' ').trim();
+        }
 
         function getYearColor(year, text) {
             let hash = 0;
@@ -275,7 +319,7 @@
                     
                     const rows = bookGroups[bookName].map(item => `
                         <tr>
-                            <td>${isEn ? item.en : item.de}</td> 
+                            <td>${formatText(isEn ? item.en : item.de)}</td> 
                             <td class="page-col">${item.page}</td>
                         </tr>
                     `).join('');
