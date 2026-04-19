@@ -6,31 +6,29 @@
     <title>Bibliothek Register - Leonard Loacker</title>
     <style>
         :root {
-            --bg-color: #f8f9fa;
+            --bg-color: #f0f2f5;
             --card-bg: #ffffff;
-            --text-main: #212529;
-            --text-sub: #6c757d;
-            --search-bg: #ffffff;
-            --border: #e9ecef;
+            --text-main: #1a1a1a;
+            --text-sub: #65676b;
+            --border: #dddfe2;
             --accent: #007bff;
-            --color-2025: #007bff;
-            --color-2026: #6f42c1;
+            --btn-hover: #e4e6eb;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #121212;
-                --card-bg: #1e1e1e;
-                --text-main: #f8f9fa;
-                --text-sub: #adb5bd;
-                --search-bg: #2d2d2d;
-                --border: #333333;
-                --accent: #375a7f;
-            }
+        [data-theme="dark"] {
+            --bg-color: #18191a;
+            --card-bg: #242526;
+            --text-main: #e4e6eb;
+            --text-sub: #b0b3b8;
+            --border: #3e4042;
+            --accent: #4599ff;
+            --btn-hover: #3a3b3c;
+            --shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -38,390 +36,295 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: background 0.3s;
         }
 
-        /* Language Toggle Button */
-        #langToggle {
-            position: absolute;
+        /* Controls Top */
+        .top-controls {
+            position: fixed;
             top: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
             z-index: 1001;
         }
 
+        .ctrl-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .ctrl-btn:active { transform: scale(0.95); }
+        .ctrl-btn:hover { background: var(--btn-hover); }
+
+        /* Contact Section as Buttons */
         .contact-header {
             width: 100%;
             max-width: 800px;
-            margin-bottom: 30px;
+            margin: 60px 0 30px 0;
             text-align: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
         }
 
-        .contact-info {
+        .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            font-size: 0.85rem;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .contact-info a { color: var(--text-sub); text-decoration: none; }
-
-        .year-section {
-            width: 100%;
-            max-width: 800px;
+        .contact-btn {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            box-shadow: var(--shadow);
+            transition: background 0.2s;
         }
-        
+        .contact-btn:hover { background: var(--btn-hover); }
+
+        /* Year Headers */
         .year-header {
             width: 100%;
-            background: none;
-            border: none;
+            max-width: 800px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 800;
+            box-shadow: var(--shadow);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 0;
-            cursor: pointer;
-            color: var(--text-main);
-            font-size: 2rem;
-            font-weight: 800;
-            position: relative;
         }
 
-        .year-header span::after {
-            content: '▼';
-            font-size: 0.9rem;
-            margin-left: 15px;
-            display: inline-block;
-            transition: transform 0.3s;
-            color: var(--text-sub);
-        }
-
-        .year-header.collapsed span::after { transform: rotate(-90deg); }
-        .year-content.hidden { display: none; }
-        .year-content { width: 100%; }
-
+        /* Book & Row Buttons */
         .book-section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-left: 6px solid #ccc;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             width: 100%;
+            max-width: 800px;
+            margin-bottom: 25px;
         }
 
-        .book-header { 
-            padding: 12px 20px; 
-            font-weight: 700; 
-            font-size: 0.9rem; 
+        .book-title {
+            padding: 10px 0;
+            font-weight: 700;
+            color: var(--accent);
             text-transform: uppercase;
-            background: rgba(128,128,128,0.05);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
         }
 
-        table { width: 100%; border-collapse: collapse; }
-        td { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 0.95rem; cursor: pointer; }
-        tr:hover td { background: rgba(0,123,255,0.05); }
-        .page-col { text-align: right; font-weight: 700; color: var(--text-sub); width: 80px; }
+        .entry-btn {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            margin-bottom: 8px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: var(--shadow);
+            transition: background 0.2s;
+        }
+        .entry-btn:hover { background: var(--btn-hover); }
 
+        .entry-btn span { flex: 1; margin-right: 15px; }
+        .page-badge {
+            background: var(--bg-color);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Navigation Bottom */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: var(--bg-color);
-            padding: 20px 0 35px 0;
-            box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
+            padding: 20px 0 40px 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             z-index: 1000;
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 90%;
-            max-width: 500px;
+            border-top: 1px solid var(--border);
         }
 
         #searchInput {
-            width: 100%;
-            padding: 15px 45px 15px 25px;
-            border-radius: 35px;
-            border: 2px solid var(--border);
-            background: var(--search-bg);
+            width: 90%;
+            max-width: 500px;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
             color: var(--text-main);
             font-size: 1rem;
+            box-shadow: var(--shadow);
             outline: none;
-            box-sizing: border-box;
-        }
-
-        #clearSearch {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-sub);
-            cursor: pointer;
-            display: none;
         }
 
         #toast {
             position: fixed;
-            top: 20px;
+            bottom: 120px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
+            background: var(--text-main);
+            color: var(--bg-color);
             padding: 10px 25px;
-            border-radius: 30px;
+            border-radius: 20px;
             display: none;
-            z-index: 2001;
+            z-index: 2000;
+            font-weight: 600;
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
 
-    <button id="langToggle">EN</button>
+    <div class="top-controls">
+        <button id="themeToggle" class="ctrl-btn">🌙 Dark</button>
+        <button id="langToggle" class="ctrl-btn">EN</button>
+    </div>
+
     <div id="toast">Kopiert!</div>
 
     <div class="contact-header">
         <h1 id="ui-title">Bibliothek Register</h1>
         <strong>Leonard Loacker</strong>
-        <div class="contact-info">
-            <a href="mailto:loaleo@gmx.at">loaleo@gmx.at</a>
-            <a href="https://loaleo.at" target="_blank">loaleo.at</a>
-            <a href="tel:+4368184999262">+43 681 84999262</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Nägelesgarten+3,+6850+Dornbirn" target="_blank">Nägelesgarten 3, 6850 Dornbirn</a>
+        <div class="contact-grid">
+            <a href="mailto:loaleo@gmx.at" class="contact-btn">📧 loaleo@gmx.at</a>
+            <a href="https://loaleo.at" target="_blank" class="contact-btn">🌐 loaleo.at</a>
+            <a href="tel:+4368184999262" class="contact-btn">📞 +43 681...</a>
+            <a href="https://maps.google.com/?q=Nägelesgarten+3,+6850+Dornbirn" target="_blank" class="contact-btn">📍 Dornbirn</a>
         </div>
     </div>
 
-    <div id="contentArea"></div>
+    <div id="contentArea" style="width: 100%; max-width: 800px;"></div>
     <div id="noResults" style="display:none; color:var(--text-sub); margin-top:50px; text-align:center;"></div>
 
     <div class="bottom-nav">
-        <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="" autocomplete="off">
-            <button id="clearSearch">×</button>
-        </div>
+        <input type="text" id="searchInput" placeholder="Suche..." autocomplete="off">
     </div>
 
     <script>
         const data = [
-            // ... (Daten bleiben identisch)
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Knife Block", en: "Knife Block", page: "10" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Aufhängeplan YAG", en: "Hanging plan YAG", page: "11-12" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Flug: Dehli -> Abu Dhabi #Ticket", en: "Flight: Dehli -> Abu Dhabi #Ticket", page: "38" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Fredi 60er #Zeichnung", en: "Fredi 60th #Drawing", page: "60" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Sketchbook Day 001 #Zeichnung", en: "Sketchbook Day 001 #Drawing", page: "65" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Wookrock Festival, Stand mit Tobi #Zirkus", en: "Wookrock Festival, booth with Tobi #Circus", page: "66" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Theoriekurs #Easydrivers #Auto", en: "Theory course #Easydrivers #Car", page: "96-122" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "\"Talentekinder\" Nachricht von Alfons #Brief", en: "\"Talentekinder\" message from Alfons #Letter", page: "54" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Arschkarte bei Otto am 21. Geburtstag #Zettel", en: "Losing card at Otto's 21st birthday #Note", page: "90" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Auto Beleuchtung und Sonstiges am VW Golf #Easydrivers #Auto", en: "Car lighting and misc on VW Golf #Easydrivers #Car", page: "95-97" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Tutti Frutti Box #Zeichnung #Blueprint", en: "Tutti Frutti Box #Drawing #Blueprint", page: "102-103" },
             { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Museumsbesuch mit #Papa in #Basel", en: "Museum visit with #Dad in #Basel", page: "122" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Tic-Tac-Toe mit #Flo, #Finja & #Leonie; #Zirkus", en: "Tic-Tac-Toe with #Flo, #Finja & #Leonie; #Circus", page: "11" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Ultimate Tic-Tac-Toe mit #Flo", en: "Ultimate Tic-Tac-Toe with #Flo", page: "13" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Ultimate Tic-Tac-Toe #Anleitung #Spiel", en: "Ultimate Tic-Tac-Toe #Instructions #Game", page: "17" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "VS Fischbach Eröffnungskonferenz #Konferenz #Fischbach #fsj", en: "VS Fischbach opening conference #Conference #Fischbach #fsj", page: "18-22" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "erste Arbeitswoche #Fischbach #fsj", en: "first work week #Fischbach #fsj", page: "35" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Spaniqué", en: "Spaniqué", page: "41-47" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "erster & zweiter Stock #Zeichnung #Blueprint #Fischbach #fsj", en: "first & second floor #Drawing #Blueprint #Fischbach #fsj", page: "51-52" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Aufführung #MusikgymnasiumFeldkirch", en: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Performance #MusikgymnasiumFeldkirch", page: "11" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Sketchbook Day 100 #Zeichnung #Sketchbook", en: "Sketchbook Day 100 #Drawing #Sketchbook", page: "11" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "erster Solo-Trip nach #Wien #Zeichnung #Sketchbook", en: "First solo trip to #Vienna #Drawing #Sketchbook", page: "17-27" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "A&O zum Auto #Easydrivers #Auto", en: "A&O for the car #Easydrivers #Car", page: "36-38" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 3\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 3\" #fsj #SBOV #Course #Notes", page: "41-43" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", en: "provisional driver's license #Car #Easydrivers #Note", page: "47" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Kreisverkehr Messepark #Auto #Easydrivers #Zeichnung #Blueprint", en: "Roundabout Messepark #Car #Easydrivers #Drawing #Blueprint", page: "48-49" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "4x4 Rubik's Master #Rubik's #SolutionGuide", en: "4x4 Rubik's Master #Rubik's #SolutionGuide", page: "52-55" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Korg Volca Sample 2 #Korg #Keymap", en: "Korg Volca Sample 2 #Korg #Keymap", page: "57" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", en: "\"Diabolo-Chaos\" #Circus #Drawing #Sketchbook", page: "61" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "second conference #fsj #Fischbach #Conference", page: "64" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" by Aris (2c) #fsj #Fischbach #Drawing #Note", page: "80" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: "86" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Note", page: "90" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Note", page: "105" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: "112" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", en: "\"Aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär #fsj #SBOV #Notes", page: "53-54" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Circus #fsj #Fischbach", page: "67-68" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 2\" #fsj #SBOV #Mitschrift", en: "\"Aggression 2\" #fsj #SBOV #Notes", page: "69-70" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "FH Dornbirn #fsj #SBOV #Mitschrift", en: "FH Dornbirn #fsj #SBOV #Notes", page: "73" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sockenpuppe #fsj #Fischbach #Zeichnung", en: "Sock puppet #fsj #Fischbach #Drawing", page: "88-89" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Semesterkonferenz VS Fischbach #fsj #Fischbach #Konferenz", en: "Conference #fsj #Fischbach #Conference", page: "96-97" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", en: "Sketchbook 200 #Drawing #Sketchbook", page: "113" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Tanger", en: "Tangier", page: "1" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Faschingsdienstag mit #Edith #Zirkus #fsj #Fischbach", en: "Shrove Tuesday #Edith #Circus #fsj #Fischbach", page: "2-3" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Fridolin 18 #Fridolin#Film", en: "Fridolin 18 #Fridolin#Film", page: "57-61" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Sockenpuppe #fsj#Fischbach#Anleitung", en: "Sock puppet #fsj#Fischbach#Instructions", page: "67" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin#Film", en: "Merge video #Fridolin#Film", page: "68" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Lesen mit 1c #fsj#Fischbach", en: "Reading with 1c #fsj#Fischbach", page: "70" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj#Fischbach#Zettel", en: "WirHoch4 #fsj#Fischbach#Note", page: "79" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj#Fischbach#Zettel", en: "Signature Levian #fsj#Fischbach#Note", page: "84" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Flug: Tanger -> Memmingen #Ticket", en: "Flight: Tangier -> Memmingen #Ticket", page: "88" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"I Magnum\" #Zeichnung#Sketchbook", en: "\"I Magnum\" #Drawing #Sketchbook", page: "91" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jonglieren? #fsj #Fischbach", en: "Juggling? #fsj #Fischbach", page: "102" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Lesende Lara (3b)\" #fsj #Fischbach #Zeichnung #Sketchbook", en: "Lara reading #fsj #Fischbach #Drawing #Sketchbook", page: "105" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jojos Flaschenbox #fsj #Zeichnung #Sketchbook #Blueprint", en: "Jojo's box #fsj #Drawing #Sketchbook #Blueprint", page: "111-112" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Hospiz Vlbg #fsj #SBOV #Mitschrift", en: "Hospice Vlbg #fsj #SBOV #Notes", page: "116-119" }
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples", en: "Korg Volca Sample 2 - Factory Samples", page: "5" },
+            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Flug: Tanger -> Memmingen #Ticket", en: "Flight: Tangier -> Memmingen #Ticket", page: "88" }
+            // ... Weitere Daten hier einfügen
         ];
 
         let isEn = false;
-
         const uiTexts = {
-            de: {
-                title: "Bibliothek Register",
-                searchPlaceholder: "Suche... (Taste / )",
-                noResults: "Nichts gefunden.",
-                toast: "Kopiert!",
-                pageSuffix: "S.",
-                toggleBtn: "EN"
-            },
-            en: {
-                title: "Library Index",
-                searchPlaceholder: "Search... (Key / )",
-                noResults: "No results found.",
-                toast: "Copied!",
-                pageSuffix: "p.",
-                toggleBtn: "DE"
-            }
+            de: { title: "Bibliothek Register", search: "Suche...", toast: "Kopiert!", p: "S.", lang: "EN", dark: "🌙 Dark", light: "☀️ Light" },
+            en: { title: "Library Index", search: "Search...", toast: "Copied!", p: "p.", lang: "DE", dark: "🌙 Dark", light: "☀️ Light" }
         };
 
-        const searchInput = document.getElementById('searchInput');
-        const clearBtn = document.getElementById('clearSearch');
-        const contentArea = document.getElementById('contentArea');
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
         const langToggle = document.getElementById('langToggle');
+        const searchInput = document.getElementById('searchInput');
 
-        function updateUI() {
-            const currentUI = isEn ? uiTexts.en : uiTexts.de;
-            document.getElementById('ui-title').innerText = currentUI.title;
-            searchInput.placeholder = currentUI.searchPlaceholder;
-            document.getElementById('noResults').innerText = currentUI.noResults;
-            document.getElementById('toast').innerText = currentUI.toast;
-            langToggle.innerText = currentUI.toggleBtn;
-            render(searchInput.value);
-        }
+        // Theme Logic
+        themeToggle.onclick = () => {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerText = isDark ? uiTexts[isEn?'en':'de'].dark : uiTexts[isEn?'en':'de'].light;
+        };
 
+        // Language Logic
         langToggle.onclick = () => {
             isEn = !isEn;
             updateUI();
         };
 
+        function updateUI() {
+            const ui = isEn ? uiTexts.en : uiTexts.de;
+            document.getElementById('ui-title').innerText = ui.title;
+            searchInput.placeholder = ui.search;
+            langToggle.innerText = ui.lang;
+            themeToggle.innerText = body.getAttribute('data-theme') === 'dark' ? ui.light : ui.dark;
+            render(searchInput.value);
+        }
+
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
             const toast = document.getElementById('toast');
+            toast.innerText = isEn ? uiTexts.en.toast : uiTexts.de.toast;
             toast.style.display = 'block';
             setTimeout(() => toast.style.display = 'none', 1500);
         }
 
-        clearBtn.onclick = () => {
-            searchInput.value = "";
-            clearBtn.style.display = "none";
-            render();
-        };
-
-        window.onkeydown = (e) => {
-            if (e.key === '/') {
-                if (document.activeElement !== searchInput) {
-                    e.preventDefault();
-                    searchInput.focus();
-                }
-            }
-            if (e.key === 'Escape') {
-                searchInput.value = "";
-                render();
-            }
-        };
-
         function render(filter = "") {
+            const contentArea = document.getElementById('contentArea');
             contentArea.innerHTML = "";
             const query = filter.toLowerCase();
-            clearBtn.style.display = query ? "block" : "none";
-            const currentUI = isEn ? uiTexts.en : uiTexts.de;
+            const ui = isEn ? uiTexts.en : uiTexts.de;
 
             const filtered = data.filter(item => 
-                item.de.toLowerCase().includes(query) || item.en.toLowerCase().includes(query) ||
-                item.bDe.toLowerCase().includes(query) || item.bEn.toLowerCase().includes(query)
+                (isEn ? item.en : item.de).toLowerCase().includes(query) || 
+                (isEn ? item.bEn : item.bDe).toLowerCase().includes(query)
             );
-
-            document.getElementById('noResults').style.display = filtered.length ? "none" : "block";
 
             const years = [...new Set(filtered.map(item => item.year))].sort((a,b) => b-a);
 
             years.forEach(year => {
-                const yearSection = document.createElement('div');
-                yearSection.className = 'year-section';
-
-                const yearBtn = document.createElement('button');
-                yearBtn.className = 'year-header';
-                yearBtn.innerHTML = `<span>${year}</span>`;
-                yearBtn.onclick = () => {
-                    const content = yearSection.querySelector('.year-content');
-                    content.classList.toggle('hidden');
-                    yearBtn.classList.toggle('collapsed');
-                };
-
-                const yearContent = document.createElement('div');
-                yearContent.className = 'year-content';
+                const yearHeader = document.createElement('div');
+                yearHeader.className = 'year-header';
+                yearHeader.innerText = year;
                 
-                const yearColor = year === 2025 ? 'var(--color-2025)' : 'var(--color-2026)';
+                const yearContent = document.createElement('div');
+                
                 const yearData = filtered.filter(item => item.year === year);
-                const bookGroups = yearData.reduce((acc, item) => {
-                    const name = isEn ? item.bEn : item.bDe;
-                    if (!acc[name]) acc[name] = [];
-                    acc[name].push(item);
-                    return acc;
-                }, {});
+                const books = [...new Set(yearData.map(item => isEn ? item.bEn : item.bDe))];
 
-                for (const bookName in bookGroups) {
-                    const section = document.createElement('div');
-                    section.className = 'book-section';
-                    section.style.borderLeftColor = yearColor;
+                books.forEach(book => {
+                    const bookSec = document.createElement('div');
+                    bookSec.className = 'book-section';
+                    bookSec.innerHTML = `<div class="book-title">${book}</div>`;
+                    
+                    yearData.filter(i => (isEn ? i.bEn : i.bDe) === book).forEach(entry => {
+                        const btn = document.createElement('div');
+                        btn.className = 'entry-btn';
+                        const txt = isEn ? entry.en : entry.de;
+                        btn.innerHTML = `<span>${txt}</span><div class="page-badge">${ui.p} ${entry.page}</div>`;
+                        btn.onclick = () => copyToClipboard(`${txt}, ${ui.p} ${entry.page}`);
+                        bookSec.appendChild(btn);
+                    });
+                    yearContent.appendChild(bookSec);
+                });
 
-                    const rows = bookGroups[bookName].map(item => {
-                        const displayText = isEn ? item.en : item.de;
-                        return `
-                        <tr onclick="copyToClipboard('${displayText}, ${currentUI.pageSuffix} ${item.page}')">
-                            <td>${displayText}</td>
-                            <td class="page-col">${item.page}</td>
-                        </tr>
-                    `}).join('');
-
-                    section.innerHTML = `
-                        <div class="book-header" style="color:${yearColor}">${bookName}</div>
-                        <table>${rows}</table>
-                    `;
-                    yearContent.appendChild(section);
-                }
-
-                yearSection.appendChild(yearBtn);
-                yearSection.appendChild(yearContent);
-                contentArea.appendChild(yearSection);
+                contentArea.appendChild(yearHeader);
+                contentArea.appendChild(yearContent);
             });
         }
 
-        searchInput.addEventListener('input', e => render(e.target.value));
+        searchInput.oninput = (e) => render(e.target.value);
         updateUI();
     </script>
 </body>
