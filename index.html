@@ -42,35 +42,47 @@
             width: 100vw;
         }
 
-        /* Top Bar & Toggles */
+        /* Top Bar */
         .top-bar {
             width: 100%;
             max-width: 500px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             margin-bottom: 30px;
         }
 
+        /* Theme Toggle mit SVG Icons */
         .toggle-box {
-            width: 72px;
-            height: 38px;
+            width: 76px;
+            height: 40px;
             background: var(--toggle-bg);
             border-radius: 20px;
             position: relative;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
+            padding: 0 8px;
             cursor: pointer;
             border: 1px solid var(--border);
         }
 
-        .toggle-box span { font-size: 1.1rem; z-index: 2; opacity: 0.3; transition: opacity 0.2s; }
-        .toggle-box span.active { opacity: 1; }
+        .toggle-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--icon-stroke);
+            fill: none;
+            stroke-width: 2;
+            z-index: 2;
+            transition: opacity 0.2s;
+            opacity: 0.3;
+        }
+
+        .toggle-box svg.active { opacity: 1; }
         
         .handle {
             position: absolute;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             background: var(--card-bg);
             border-radius: 50%;
             left: 2px;
@@ -79,10 +91,9 @@
             z-index: 1;
         }
 
-        [data-lang="en"] .lang-handle { transform: translateX(34px); }
-        [data-theme="dark"] .theme-handle { transform: translateX(34px); }
+        [data-theme="dark"] .theme-handle { transform: translateX(36px); }
 
-        /* Contact Grid & SVG Icons */
+        /* Contact Grid */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -100,7 +111,6 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: all 0.2s;
             padding: 12px;
         }
 
@@ -114,7 +124,7 @@
             stroke-linejoin: round;
         }
 
-        /* Content & Year Styles */
+        /* Content */
         .year-section { width: 100%; max-width: 600px; margin-bottom: 10px; }
 
         .year-btn {
@@ -176,7 +186,7 @@
             white-space: nowrap;
         }
 
-        /* Search Bar */
+        /* Search */
         .search-bar {
             position: fixed;
             bottom: 30px;
@@ -206,24 +216,18 @@
             border-radius: 20px;
             display: none;
             z-index: 2000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body data-theme="light" data-lang="de">
+<body data-theme="light">
 
     <div id="toast">Kopiert!</div>
 
     <div class="top-bar">
         <div class="toggle-box" id="themeToggle">
             <div class="handle theme-handle"></div>
-            <span id="sunIcon" class="active">☀️</span>
-            <span id="moonIcon">🌙</span>
-        </div>
-        <div class="toggle-box" id="langToggle">
-            <div class="handle lang-handle"></div>
-            <span id="deIcon" class="active">🇩🇪</span>
-            <span id="enIcon">🇬🇧</span>
+            <svg id="sunIcon" class="active" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg id="moonIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </div>
     </div>
 
@@ -251,99 +255,85 @@
     <script>
         const data = [
             // 2025
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Knife Block", en: "Knife Block", page: "10" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Aufhängeplan YAG", en: "Hanging plan YAG", page: "11-12" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Flug: Dehli -> Abu Dhabi #Ticket", en: "Flight: Dehli -> Abu Dhabi #Ticket", page: "38" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Fredi 60er #Zeichnung", en: "Fredi 60th #Drawing", page: "60" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Sketchbook Day 001 #Zeichnung", en: "Sketchbook Day 001 #Drawing", page: "65" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Wookrock Festival, Stand mit Tobi #Zirkus", en: "Wookrock Festival, booth with Tobi #Circus", page: "66" },
-            { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Theoriekurs #Easydrivers #Auto", en: "Theory course #Easydrivers #Car", page: "96-122" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "\"Talentekinder\" Nachricht von Alfons #Brief", en: "\"Talentekinder\" message from Alfons #Letter", page: "54" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Arschkarte bei Otto am 21. Geburtstag #Zettel", en: "Losing card at Otto's 21st birthday #Note", page: "90" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Auto Beleuchtung und Sonstiges am VW Golf #Easydrivers #Auto", en: "Car lighting and misc on VW Golf #Easydrivers #Car", page: "95-97" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Tutti Frutti Box #Zeichnung #Blueprint", en: "Tutti Frutti Box #Drawing #Blueprint", page: "102-103" },
-            { year: 2025, bDe: "Buch 2: Juli - Sept", bEn: "Book 2: July - Sept", de: "Museumsbesuch mit #Papa in #Basel", en: "Museum visit with #Dad in #Basel", page: "122" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Tic-Tac-Toe mit #Flo, #Finja & #Leonie; #Zirkus", en: "Tic-Tac-Toe with #Flo, #Finja & #Leonie; #Circus", page: "11" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Ultimate Tic-Tac-Toe mit #Flo", en: "Ultimate Tic-Tac-Toe with #Flo", page: "13" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Ultimate Tic-Tac-Toe #Anleitung #Spiel", en: "Ultimate Tic-Tac-Toe #Instructions #Game", page: "17" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "VS Fischbach Eröffnungskonferenz #Konferenz #Fischbach #fsj", en: "VS Fischbach opening conference #Conference #Fischbach #fsj", page: "18-22" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "erste Arbeitswoche #Fischbach #fsj", en: "first work week #Fischbach #fsj", page: "35" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "Spaniqué", en: "Spaniqué", page: "41-47" },
-            { year: 2025, bDe: "Buch 3: Sept - Okt", bEn: "Book 3: Sept - Oct", de: "erster & zweiter Stock #Zeichnung #Blueprint #Fischbach #fsj", en: "first & second floor #Drawing #Blueprint #Fischbach #fsj", page: "51-52" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Aufführung #MusikgymnasiumFeldkirch", en: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Performance #MusikgymnasiumFeldkirch", page: "11" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Sketchbook Day 100 #Zeichnung #Sketchbook", en: "Sketchbook Day 100 #Drawing #Sketchbook", page: "11" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "erster Solo-Trip nach #Wien #Zeichnung #Sketchbook", en: "First solo trip to #Vienna #Drawing #Sketchbook", page: "17-27" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "A&O zum Auto #Easydrivers #Auto", en: "A&O for the car #Easydrivers #Car", page: "36-38" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 3\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 3\" #fsj #SBOV #Course #Notes", page: "41-43" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", en: "provisional driver's license #Car #Easydrivers #Note", page: "47" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Kreisverkehr Messepark #Auto #Easydrivers #Zeichnung #Blueprint", en: "Roundabout Messepark #Car #Easydrivers #Drawing #Blueprint", page: "48-49" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "4x4 Rubik's Master #Rubik's #SolutionGuide", en: "4x4 Rubik's Master #Rubik's #SolutionGuide", page: "52-55" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Korg Volca Sample 2 #Korg #Keymap", en: "Korg Volca Sample 2 #Korg #Keymap", page: "57" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", en: "\"Diabolo-Chaos\" #Circus #Drawing #Sketchbook", page: "61" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "zweite Konferenz #fsj #Fischbach #Konferenz", en: "second conference #fsj #Fischbach #Conference", page: "64" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", en: "Paul Koch: \"Vocation 4\" #fsj #SBOV #Course #Notes", page: "76-77" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", en: "\"Panda-Pan\" by Aris (2c) #fsj #Fischbach #Drawing #Note", page: "80" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Fridolin Maturaball #Ticket", en: "Fridolin Prom #Ticket", page: "86" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", en: "Snowflake by Emma (3b) #fsj #Fischbach #Note", page: "90" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Note", page: "105" },
-            { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: "112" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Knife Block", page: "10" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Aufhängeplan YAG", page: "11-12" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Flug: Dehli -> Abu Dhabi #Ticket", page: "38" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Fredi 60er #Zeichnung", page: "60" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Sketchbook Day 001 #Zeichnung", page: "65" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Wookrock Festival, Stand mit Tobi #Zirkus", page: "66" },
+            { year: 2025, b: "Buch 1: März - Juli", de: "Theoriekurs #Easydrivers #Auto", page: "96-122" },
+            { year: 2025, b: "Buch 2: Juli - Sept", de: "\"Talentekinder\" Nachricht von Alfons #Brief", page: "54" },
+            { year: 2025, b: "Buch 2: Juli - Sept", de: "Arschkarte bei Otto am 21. Geburtstag #Zettel", page: "90" },
+            { year: 2025, b: "Buch 2: Juli - Sept", de: "Auto Beleuchtung und Sonstiges am VW Golf #Easydrivers #Auto", page: "95-97" },
+            { year: 2025, b: "Buch 2: Juli - Sept", de: "Tutti Frutti Box #Zeichnung #Blueprint", page: "102-103" },
+            { year: 2025, b: "Buch 2: Juli - Sept", de: "Museumsbesuch mit #Papa in #Basel", page: "122" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "Tic-Tac-Toe mit #Flo, #Finja & #Leonie; #Zirkus", page: "11" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "Ultimate Tic-Tac-Toe mit #Flo", page: "13" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "Ultimate Tic-Tac-Toe #Anleitung #Spiel", page: "17" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "VS Fischbach Eröffnungskonferenz #Konferenz #Fischbach #fsj", page: "18-22" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "erste Arbeitswoche #Fischbach #fsj", page: "35" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "Spaniqué", page: "41-47" },
+            { year: 2025, b: "Buch 3: Sept - Okt", de: "erster & zweiter Stock #Zeichnung #Blueprint #Fischbach #fsj", page: "51-52" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "\"Schneller Lauf\" #Mademoiselle #Magdalena #Aufführung #MusikgymnasiumFeldkirch", page: "11" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Sketchbook Day 100 #Zeichnung #Sketchbook", page: "11" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "erster Solo-Trip nach #Wien #Zeichnung #Sketchbook", page: "17-27" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "A&O zum Auto #Easydrivers #Auto", page: "36-38" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 3\" #fsj #SBOV #Kurs #Mitschrift", page: "41-43" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "vorläufiger Führerschein #Auto #Easydrivers #Zettel", page: "47" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Kreisverkehr Messepark #Auto #Easydrivers #Zeichnung #Blueprint", page: "48-49" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "4x4 Rubik's Master #Rubik's #SolutionGuide", page: "52-55" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Korg Volca Sample 2 #Korg #Keymap", page: "57" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "\"Diabolo-Chaos\" #Zirkus #Zeichnung #Sketchbook", page: "61" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "zweite Konferenz #fsj #Fischbach #Konferenz", page: "64" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Paul Koch: \"Beruf(ung) und der Blick auf dich selbst 4\" #fsj #SBOV #Kurs #Mitschrift", page: "76-77" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "\"Panda-Pan\" vo Aris (2c) #fsj #Fischbach #Zeichnung #Zettel", page: "80" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Fridolin Maturaball #Ticket", page: "86" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Schneeflocke vo Emma (3b) #fsj #Fischbach #Zettel", page: "90" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", page: "99" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", page: "105" },
+            { year: 2025, b: "Buch 4: Okt - Dez", de: "Weihnachten Zirkushalle #Zirkus #Zettel", page: "112" },
             // 2026
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", en: "\"Aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär #fsj #SBOV #Notes", page: "53-54" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Circus #fsj #Fischbach", page: "67-68" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 2\" #fsj #SBOV #Mitschrift", en: "\"Aggression 2\" #fsj #SBOV #Notes", page: "69-70" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "FH Dornbirn #fsj #SBOV #Mitschrift", en: "FH Dornbirn #fsj #SBOV #Notes", page: "73" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Sockenpuppe #fsj #Fischbach #Zeichnung", en: "Sock puppet #fsj #Fischbach #Drawing", page: "88-89" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Semesterkonferenz VS Fischbach #fsj #Fischbach #Konferenz", en: "Conference #fsj #Fischbach #Conference", page: "96-97" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", en: "Sketchbook 200 #Drawing #Sketchbook", page: "113" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Tanger", en: "Tangier", page: "1" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Faschingsdienstag mit #Edith #Zirkus #fsj #Fischbach", en: "Shrove Tuesday #Edith #Circus #fsj #Fischbach", page: "2-3" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Fridolin 18 #Fridolin #Film", en: "Fridolin 18 #Fridolin #Film", page: "57-61" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Sockenpuppe #fsj #Fischbach #Anleitung", en: "Sock puppet #fsj #Fischbach #Instructions", page: "67" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Video zusammenfügen ohne Reexportation? #Fridolin #Film", en: "Merge video #Fridolin #Film", page: "68" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Lesen mit 1c #fsj #Fischbach", en: "Reading with 1c #fsj #Fischbach", page: "70" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Nachricht von WirHoch4 #fsj #Fischbach #Zettel", en: "WirHoch4 #fsj #Fischbach #Note", page: "79" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Unterschrift\" Levian (4b) #fsj #Fischbach #Zettel", en: "Signature Levian #fsj #Fischbach #Note", page: "84" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Flug: Tanger -> Memmingen #Ticket", en: "Flight: Tangier -> Memmingen #Ticket", page: "88" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"I Magnum\" #Zeichnung #Sketchbook", en: "\"I Magnum\" #Drawing #Sketchbook", page: "91" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jonglieren? #fsj #Fischbach", en: "Juggling? #fsj #Fischbach", page: "102" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "\"Lesende Lara (3b)\" #fsj #Fischbach #Zeichnung #Sketchbook", en: "Lara reading #fsj #Fischbach #Drawing #Sketchbook", page: "105" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Jojos Flaschenbox #fsj #Zeichnung #Sketchbook #Blueprint", en: "Jojo's box #fsj #Drawing #Sketchbook #Blueprint", page: "111-112" },
-            { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Hospiz Vlbg #fsj #SBOV #Mitschrift", en: "Hospice Vlbg #fsj #SBOV #Notes", page: "116-119" }
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", page: "35" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", page: "49-50" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", page: "53-54" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", page: "67-68" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 2\" #fsj #SBOV #Mitschrift", page: "69-70" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "FH Dornbirn #fsj #SBOV #Mitschrift", page: "73" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Sockenpuppe #fsj #Fischbach #Zeichnung", page: "88-89" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Semesterkonferenz VS Fischbach #fsj #Fischbach #Konferenz", page: "96-97" },
+            { year: 2026, b: "Buch 5: Dez - Feb", de: "Sketchbook Day 200 #Zeichnung #Sketchbook", page: "113" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Tanger", page: "1" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Faschingsdienstag mit #Edith #Zirkus #fsj #Fischbach", page: "2-3" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Fridolin 18 #Fridolin #Film", page: "57-61" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Sockenpuppe #fsj #Fischbach #Anleitung", page: "67" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Video zusammenfügen ohne Reexportation? #Fridolin #Film", page: "68" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Lesen mit 1c #fsj #Fischbach", page: "70" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Nachricht von WirHoch4 #fsj #Fischbach #Zettel", page: "79" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "\"Unterschrift\" Levian (4b) #fsj #Fischbach #Zettel", page: "84" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Flug: Tanger -> Memmingen #Ticket", page: "88" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "\"I Magnum\" #Zeichnung #Sketchbook", page: "91" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Jonglieren? #fsj #Fischbach", page: "102" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "\"Lesende Lara (3b)\" #fsj #Fischbach #Zeichnung #Sketchbook", page: "105" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Jojos Flaschenbox #fsj #Zeichnung #Sketchbook #Blueprint", page: "111-112" },
+            { year: 2026, b: "Buch 6: Feb - März", de: "Hospiz Vlbg #fsj #SBOV #Mitschrift", page: "116-119" }
         ];
 
-        let currentLang = 'de';
         let currentTheme = 'light';
 
-        function updateToggles() {
-            document.getElementById('deIcon').classList.toggle('active', currentLang === 'de');
-            document.getElementById('enIcon').classList.toggle('active', currentLang === 'en');
-            document.getElementById('sunIcon').classList.toggle('active', currentTheme === 'light');
-            document.getElementById('moonIcon').classList.toggle('active', currentTheme === 'dark');
-        }
+        const themeToggle = document.getElementById('themeToggle');
 
-        document.getElementById('themeToggle').onclick = () => {
+        themeToggle.onclick = () => {
             currentTheme = currentTheme === 'light' ? 'dark' : 'light';
             document.body.setAttribute('data-theme', currentTheme);
-            updateToggles();
-        };
-
-        document.getElementById('langToggle').onclick = () => {
-            currentLang = currentLang === 'de' ? 'en' : 'de';
-            document.body.setAttribute('data-lang', currentLang);
-            document.getElementById('searchInput').placeholder = currentLang === 'de' ? "Suche..." : "Search...";
-            updateToggles();
-            render(document.getElementById('searchInput').value);
+            document.getElementById('sunIcon').classList.toggle('active');
+            document.getElementById('moonIcon').classList.toggle('active');
         };
 
         function copy(text) {
             navigator.clipboard.writeText(text);
             const t = document.getElementById('toast');
-            t.innerText = currentLang === 'de' ? "Kopiert!" : "Copied!";
             t.style.display = 'block';
             setTimeout(() => t.style.display = 'none', 1200);
         }
@@ -352,7 +342,7 @@
             const area = document.getElementById('contentArea');
             area.innerHTML = "";
             const query = filter.toLowerCase();
-            const filtered = data.filter(i => (currentLang === 'de' ? i.de : i.en).toLowerCase().includes(query));
+            const filtered = data.filter(i => i.de.toLowerCase().includes(query));
             const years = [...new Set(filtered.map(i => i.year))].sort((a,b) => b-a);
 
             years.forEach(year => {
@@ -374,20 +364,18 @@
                 };
 
                 const yearColor = year === 2025 ? 'var(--accent-2025)' : 'var(--accent-2026)';
-                const books = [...new Set(filtered.filter(i => i.year === year).map(i => currentLang === 'de' ? i.bDe : i.bEn))];
+                const books = [...new Set(filtered.filter(i => i.year === year).map(i => i.b))];
 
                 books.forEach(bookName => {
                     const group = document.createElement('div');
                     group.className = 'book-group';
                     group.innerHTML = `<div class="book-header" style="color:${yearColor}">${bookName}</div>`;
 
-                    filtered.filter(i => i.year === year && (currentLang === 'de' ? i.bDe : i.bEn) === bookName).forEach(entry => {
+                    filtered.filter(i => i.year === year && i.b === bookName).forEach(entry => {
                         const row = document.createElement('div');
                         row.className = 'entry';
-                        const label = currentLang === 'de' ? entry.de : entry.en;
-                        const pLabel = currentLang === 'de' ? 'S.' : 'p.';
-                        row.innerHTML = `<span>${label}</span><div class="page-badge">${pLabel} ${entry.page}</div>`;
-                        row.onclick = () => copy(`${label}, ${pLabel} ${entry.page}`);
+                        row.innerHTML = `<span>${entry.de}</span><div class="page-badge">S. ${entry.page}</div>`;
+                        row.onclick = () => copy(`${entry.de}, S. ${entry.page}`);
                         group.appendChild(row);
                     });
                     container.appendChild(group);
