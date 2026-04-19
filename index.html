@@ -13,7 +13,6 @@
             --search-bg: #ffffff;
             --border: #e9ecef;
             --accent: #007bff;
-            --tag-bg: #eee;
             --color-2025: #007bff;
             --color-2026: #6f42c1;
         }
@@ -27,7 +26,6 @@
                 --search-bg: #2d2d2d;
                 --border: #333333;
                 --accent: #375a7f;
-                --tag-bg: #333;
             }
         }
 
@@ -40,6 +38,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        /* Language Toggle Button */
+        #langToggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1001;
         }
 
         .contact-header {
@@ -126,35 +141,12 @@
             left: 0;
             right: 0;
             background: var(--bg-color);
-            padding: 10px 0 25px 0;
+            padding: 20px 0 35px 0;
             box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 1000;
-        }
-
-        #tagCloud {
-            display: none;
-            width: 100%;
-            max-width: 600px;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 0 20px 15px 20px;
-            scrollbar-width: none;
-        }
-        #tagCloud::-webkit-scrollbar { display: none; }
-
-        .tag-btn {
-            display: inline-block;
-            background: var(--tag-bg);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            margin-right: 8px;
-            border: 1px solid var(--border);
-            color: var(--text-main);
         }
 
         .search-wrapper {
@@ -204,6 +196,7 @@
 </head>
 <body>
 
+    <button id="langToggle">EN</button>
     <div id="toast">Kopiert!</div>
 
     <div class="contact-header">
@@ -221,7 +214,6 @@
     <div id="noResults" style="display:none; color:var(--text-sub); margin-top:50px; text-align:center;"></div>
 
     <div class="bottom-nav">
-        <div id="tagCloud"></div>
         <div class="search-wrapper">
             <input type="text" id="searchInput" placeholder="" autocomplete="off">
             <button id="clearSearch">×</button>
@@ -230,6 +222,7 @@
 
     <script>
         const data = [
+            // ... (Daten bleiben identisch)
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Knife Block", en: "Knife Block", page: "10" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Aufhängeplan YAG", en: "Hanging plan YAG", page: "11-12" },
             { year: 2025, bDe: "Buch 1: März - Juli", bEn: "Book 1: March - July", de: "Flug: Dehli -> Abu Dhabi #Ticket", en: "Flight: Dehli -> Abu Dhabi #Ticket", page: "38" },
@@ -267,12 +260,12 @@
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "PH Feldkirch Exkursion #fsj #SBOV #Mitschrift", en: "PH Feldkirch excursion #fsj #SBOV #Notes", page: "99" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Zeichnung vo Lina (1c) #fsj #Fischbach #Zettel", en: "Drawing by Lina (1c) #fsj #Fischbach #Note", page: "105" },
             { year: 2025, bDe: "Buch 4: Okt - Dez", bEn: "Book 4: Oct - Dec", de: "Weihnachten Zirkushalle #Zirkus #Zettel", en: "Christmas Circus Hall #Circus #Note", page: "112" },
-            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
-            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
-            { year: 2025, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Korg Volca Sample 2 - Factory Samples #Korg", en: "Korg Volca Sample 2 - Factory Samples #Korg", page: "5" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Rubik's Pyraminx #Rubik's #SolutionGuide", en: "Rubik's Pyraminx #Rubik's #SolutionGuide", page: "8-9" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Spitzenschachtel für #Mademoiselle #Mäggi", en: "Lace box for #Mademoiselle #Mäggi", page: "35" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 1\" #fsj #SBOV #Mitschrift", en: "\"Aggression 1\" #fsj #SBOV #Notes", page: "49-50" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Andrea Bechter-Bär: \"Arbeit mit Menschen mit Beeinträchtigung 1\" #fsj #SBOV #Mitschrift", en: "Andrea Bechter-Bär #fsj #SBOV #Notes", page: "53-54" },
-            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dec - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Circus #fsj #Fischbach", page: "67-68" },
+            { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Clownerie Faschingsnummer mit #Edith #Zirkus #fsj #Fischbach", en: "Clowning #Edith #Circus #fsj #Fischbach", page: "67-68" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "\"Umgang mit Agression & Verhaltensauffälligkeiten 2\" #fsj #SBOV #Mitschrift", en: "\"Aggression 2\" #fsj #SBOV #Notes", page: "69-70" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "FH Dornbirn #fsj #SBOV #Mitschrift", en: "FH Dornbirn #fsj #SBOV #Notes", page: "73" },
             { year: 2026, bDe: "Buch 5: Dez - Feb", bEn: "Book 5: Dez - Feb", de: "Sockenpuppe #fsj #Fischbach #Zeichnung", en: "Sock puppet #fsj #Fischbach #Drawing", page: "88-89" },
@@ -294,41 +287,46 @@
             { year: 2026, bDe: "Buch 6: Feb - März", bEn: "Book 6: Feb - March", de: "Hospiz Vlbg #fsj #SBOV #Mitschrift", en: "Hospice Vlbg #fsj #SBOV #Notes", page: "116-119" }
         ];
 
-        // LOGIK FÜR SPRACH-ERKENNUNG
-        const userLang = navigator.language || navigator.userLanguage;
-        // Wenn die Sprache NICHT mit 'de' beginnt (de, de-AT, de-CH), wird Englisch erzwungen.
-        const isEn = !userLang.startsWith('de');
+        let isEn = false;
 
-        // Übersetzungen für das UI
         const uiTexts = {
             de: {
                 title: "Bibliothek Register",
                 searchPlaceholder: "Suche... (Taste / )",
                 noResults: "Nichts gefunden.",
                 toast: "Kopiert!",
-                pageSuffix: "S."
+                pageSuffix: "S.",
+                toggleBtn: "EN"
             },
             en: {
                 title: "Library Index",
                 searchPlaceholder: "Search... (Key / )",
                 noResults: "No results found.",
                 toast: "Copied!",
-                pageSuffix: "p."
+                pageSuffix: "p.",
+                toggleBtn: "DE"
             }
         };
-
-        const currentUI = isEn ? uiTexts.en : uiTexts.de;
-
-        // UI Elemente initialisieren
-        document.getElementById('ui-title').innerText = currentUI.title;
-        document.getElementById('searchInput').placeholder = currentUI.searchPlaceholder;
-        document.getElementById('noResults').innerText = currentUI.noResults;
-        document.getElementById('toast').innerText = currentUI.toast;
 
         const searchInput = document.getElementById('searchInput');
         const clearBtn = document.getElementById('clearSearch');
         const contentArea = document.getElementById('contentArea');
-        const tagCloud = document.getElementById('tagCloud');
+        const langToggle = document.getElementById('langToggle');
+
+        function updateUI() {
+            const currentUI = isEn ? uiTexts.en : uiTexts.de;
+            document.getElementById('ui-title').innerText = currentUI.title;
+            searchInput.placeholder = currentUI.searchPlaceholder;
+            document.getElementById('noResults').innerText = currentUI.noResults;
+            document.getElementById('toast').innerText = currentUI.toast;
+            langToggle.innerText = currentUI.toggleBtn;
+            render(searchInput.value);
+        }
+
+        langToggle.onclick = () => {
+            isEn = !isEn;
+            updateUI();
+        };
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
@@ -337,15 +335,9 @@
             setTimeout(() => toast.style.display = 'none', 1500);
         }
 
-        searchInput.onfocus = () => tagCloud.style.display = "block";
-        searchInput.onblur = () => {
-            if(!searchInput.value) setTimeout(() => tagCloud.style.display = "none", 200);
-        };
-
         clearBtn.onclick = () => {
             searchInput.value = "";
             clearBtn.style.display = "none";
-            tagCloud.style.display = "none";
             render();
         };
 
@@ -366,7 +358,7 @@
             contentArea.innerHTML = "";
             const query = filter.toLowerCase();
             clearBtn.style.display = query ? "block" : "none";
-            if(query) tagCloud.style.display = "block";
+            const currentUI = isEn ? uiTexts.en : uiTexts.de;
 
             const filtered = data.filter(item => 
                 item.de.toLowerCase().includes(query) || item.en.toLowerCase().includes(query) ||
@@ -429,17 +421,8 @@
             });
         }
 
-        function initTags() {
-            // Tags werden aus dem de oder en Text gezogen, je nach Sprache
-            const allTags = [...new Set(data.map(i => isEn ? i.en : i.de).join(" ").match(/#[A-Za-z0-9']+/g))].sort();
-            tagCloud.innerHTML = allTags.map(t => 
-                `<div class="tag-btn" onclick="searchInput.value='${t}'; render('${t}');">${t}</div>`
-            ).join("");
-        }
-
         searchInput.addEventListener('input', e => render(e.target.value));
-        initTags();
-        render();
+        updateUI();
     </script>
 </body>
 </html>
